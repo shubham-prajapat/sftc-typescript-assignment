@@ -1,11 +1,29 @@
 [
 	{
-		"firstName": "John",
-		"middleName": "Grace",
-		"lastName": "Doe",
-		"email": "john@gmail.com",
-		"address": "Kulas Light",
-		"phone": "123456",
+		"firstName": "User 1",
+		"middleName": "mid",
+		"lastName": "last",
+		"email": "user1@gmail.com",
+		"address": "India",
+		"phone": "9876543120",
 		"role": 1
+	},
+	{
+		"firstName": "User 2",
+		"middleName": "mid",
+		"lastName": "last",
+		"email": "user2@gmail.com",
+		"address": "India",
+		"phone": "9876543120",
+		"role": 2
+	},
+	{
+		"firstName": "User 3",
+		"middleName": "mid",
+		"lastName": "last",
+		"email": "user2@gmail.com",
+		"address": "India",
+		"phone": "9876543120",
+		"role": 3
 	}
 ]

@@ -1,5 +1,4 @@
 "use strict";
-// Definitions
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -9,6 +8,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+// Definitions
 var Role;
 (function (Role) {
     Role[Role["SuperAdmin"] = 1] = "SuperAdmin";
@@ -38,7 +38,6 @@ class User {
         }
     }
 }
-// INIT
 // Elements
 const refreshData = document.querySelector("#refreshData");
 const rowWrapper = document.querySelector("#tbody");
@@ -51,28 +50,50 @@ refreshData.addEventListener("click", () => __awaiter(void 0, void 0, void 0, fu
         users.push(user);
     }
     populateTable(users);
+    refreshData.innerHTML = "Refresh Data";
 }));
-const forEachColumn = (rowEl, callBack) => { };
 const clickListeners = {
     edit: (e) => {
-        forEachColumn(e.currentTarget.closest("tr"), () => { });
-        /* ([...row.children] as HTMLTableCellElement[]).forEach((element) => {
-            if (element.dataset.actioncolumn) {
-                element.innerHTML = "";
-                addActionButton("Save", element, clickListeners.save, "primary");
-                addActionButton("Cancel", element, clickListeners.cancel, "secondary");
-                return;
-            }
-            let initialValue = element.innerText;
-            element.innerHTML = `<input type="text" value="${initialValue}" data-initalvalue="${initialValue}" />`;
-        }); */
+        editMode("EDIT", e.currentTarget.closest("tr"));
     },
     delete: (e) => {
         let row = e.currentTarget.closest("tr");
         row === null || row === void 0 ? void 0 : row.remove();
     },
-    save: (e) => { },
-    cancel: (e) => { },
+    save: (e) => {
+        editMode("SAVE", e.currentTarget.closest("tr"));
+    },
+    cancel: (e) => {
+        editMode("CANCEL", e.currentTarget.closest("tr"));
+    },
+};
+const editMode = (action, row) => {
+    [...row.children].forEach((element) => {
+        if (element.dataset.actioncolumn) {
+            element.innerHTML = "";
+            if (action === "EDIT") {
+                addActionButton("Save", element, clickListeners.save, "primary");
+                addActionButton("Cancel", element, clickListeners.cancel, "secondary");
+            }
+            else if (["CANCEL", "SAVE"].includes(action)) {
+                addActionButton("Edit", element, clickListeners.edit, "primary");
+                addActionButton("Delete", element, clickListeners.delete, "secondary");
+            }
+            return;
+        }
+        if (action === "EDIT") {
+            let initialValue = element.innerText;
+            element.innerHTML = `<input type="text" value="${initialValue}" data-initalvalue="${initialValue}" />`;
+        }
+        else if (action === "SAVE") {
+            let input = element.querySelector("input");
+            element.innerHTML = input.value;
+        }
+        else if (action === "CANCEL") {
+            let input = element.querySelector("input");
+            element.innerHTML = input.dataset.initalvalue || "";
+        }
+    });
 };
 const populateTable = (users) => {
     // empty previous list

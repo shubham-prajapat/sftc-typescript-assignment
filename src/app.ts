@@ -1,5 +1,4 @@
 // Definitions
-
 enum Role {
 	SuperAdmin = 1,
 	Admin,
@@ -31,7 +30,9 @@ class User {
 	}
 }
 
-// INIT
+interface ClickListeners {
+	[prop: string]: EventListener;
+}
 
 // Elements
 const refreshData = document.querySelector("#refreshData") as HTMLButtonElement;
@@ -54,34 +55,50 @@ refreshData.addEventListener("click", async () => {
 		users.push(user);
 	}
 	populateTable(users);
+	refreshData.innerHTML = "Refresh Data";
 });
-
-interface ClickListeners {
-	[prop: string]: EventListener;
-}
-
-const forEachColumn = (rowEl: HTMLTableRowElement, callBack: () => void) => {};
 
 const clickListeners: ClickListeners = {
 	edit: (e) => {
-		forEachColumn((e.currentTarget as HTMLButtonElement).closest("tr") as HTMLTableRowElement, () => {});
-		/* ([...row.children] as HTMLTableCellElement[]).forEach((element) => {
-			if (element.dataset.actioncolumn) {
-				element.innerHTML = "";
-				addActionButton("Save", element, clickListeners.save, "primary");
-				addActionButton("Cancel", element, clickListeners.cancel, "secondary");
-				return;
-			}
-			let initialValue = element.innerText;
-			element.innerHTML = `<input type="text" value="${initialValue}" data-initalvalue="${initialValue}" />`;
-		}); */
+		editMode("EDIT", (e.currentTarget as HTMLButtonElement).closest("tr") as HTMLTableRowElement);
 	},
 	delete: (e) => {
 		let row = (e.currentTarget as HTMLButtonElement).closest("tr");
 		row?.remove();
 	},
-	save: (e) => {},
-	cancel: (e) => {},
+	save: (e) => {
+		editMode("SAVE", (e.currentTarget as HTMLButtonElement).closest("tr") as HTMLTableRowElement);
+	},
+	cancel: (e) => {
+		editMode("CANCEL", (e.currentTarget as HTMLButtonElement).closest("tr") as HTMLTableRowElement);
+	},
+};
+
+const editMode = (action: "EDIT" | "CANCEL" | "SAVE", row: HTMLTableRowElement) => {
+	([...row.children] as HTMLTableCellElement[]).forEach((element) => {
+		if (element.dataset.actioncolumn) {
+			element.innerHTML = "";
+			if (action === "EDIT") {
+				addActionButton("Save", element, clickListeners.save, "primary");
+				addActionButton("Cancel", element, clickListeners.cancel, "secondary");
+			} else if (["CANCEL", "SAVE"].includes(action)) {
+				addActionButton("Edit", element, clickListeners.edit, "primary");
+				addActionButton("Delete", element, clickListeners.delete, "secondary");
+			}
+			return;
+		}
+
+		if (action === "EDIT") {
+			let initialValue = element.innerText;
+			element.innerHTML = `<input type="text" value="${initialValue}" data-initalvalue="${initialValue}" />`;
+		} else if (action === "SAVE") {
+			let input = element.querySelector("input") as HTMLInputElement;
+			element.innerHTML = input.value;
+		} else if (action === "CANCEL") {
+			let input = element.querySelector("input") as HTMLInputElement;
+			element.innerHTML = input.dataset.initalvalue || "";
+		}
+	});
 };
 
 const populateTable = (users: User[]) => {
