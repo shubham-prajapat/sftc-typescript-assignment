@@ -1,0 +1,11 @@
+[
+	{
+		"firstName": "John",
+		"middleName": "Grace",
+		"lastName": "Doe",
+		"email": "john@gmail.com",
+		"address": "Kulas Light",
+		"phone": "123456",
+		"role": 1
+	}
+]
