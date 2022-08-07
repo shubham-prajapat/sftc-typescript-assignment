@@ -11,33 +11,74 @@
 			href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
 		/>
 
-		<script src="dist/app.js" defer></script>
+		<script type="module" src="dist/app.js" defer></script>
 	</head>
 	<body>
 		<div class="container">
+			<!-- Heading and Load Button -->
 			<div class="row">
 				<div class="col s6"><h4>Users</h4></div>
 				<div class="col s6" style="text-align: right">
 					<br />
-					<button id="refreshData" class="waves-effect waves-light btn-large red">Load Data</button>
+					<button id="refreshData" class="waves-effect waves-light btn purple">Load Data</button>
 				</div>
 			</div>
-			<table>
-				<thead>
-					<tr>
-						<th>First Name</th>
-						<th>Middle Name</th>
-						<th>Last Name</th>
-						<th>Email</th>
-						<th>Address</th>
-						<th>Phone</th>
-						<th>Role</th>
-						<th>Actions</th>
-					</tr>
-				</thead>
+			<!-- // Heading and Load Button -->
 
-				<tbody id="tbody"></tbody>
-			</table>
+			<div class="user-view-wrapper">
+				<!-- To be populated by JS -->
+			</div>
+
+			<!-- Templates -->
+			<template id="add-user">
+				<button data-target="new-user-modal" class="waves-effect modal-trigger waves-light btn-large">
+					New User
+				</button>
+			</template>
+			<template id="user-view">
+				<div class="row">
+					<div class="col s6" id="searchInputContainer"><input placeholder="Search" /></div>
+					<div class="col s6" style="text-align: right">
+						<br />
+						<div id="addUserContainer"></div>
+					</div>
+				</div>
+				<div id="table-wrapper">
+					<table>
+						<thead>
+							<tr>
+								<th>First Name</th>
+								<th>Middle Name</th>
+								<th>Last Name</th>
+								<th>Email</th>
+								<th>Address</th>
+								<th>Phone</th>
+								<th>Role</th>
+								<th>Actions</th>
+							</tr>
+						</thead>
+
+						<tbody id="tbody"></tbody>
+					</table>
+				</div>
+			</template>
+			<div id="new-user-modal" class="modal">
+				<div class="modal-content">
+					<h4>Add New User</h4>
+					<p>Fill in the details</p>
+					<input type="text" placeholder="First name" />
+					<input type="text" placeholder="Middle name" />
+					<input type="text" placeholder="Last name" />
+					<!-- to be dynamic -->
+					<button>Save</button>
+				</div>
+			</div>
 		</div>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+		<script>
+			document.addEventListener("DOMContentLoaded", function () {
+				M.AutoInit();
+			});
+		</script>
 	</body>
 </html>

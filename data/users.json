@@ -6,7 +6,8 @@
 		"email": "user1@gmail.com",
 		"address": "India",
 		"phone": "9876543120",
-		"role": 1
+		"role": 1,
+		"DOB": "19-01-2022"
 	},
 	{
 		"firstName": "User 2",
