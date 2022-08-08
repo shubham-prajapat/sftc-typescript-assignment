@@ -10,34 +10,77 @@
 			rel="stylesheet"
 			href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
 		/>
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
 
-		<script src="dist/app.js" defer></script>
+		<script type="module" src="dist/app.js" defer></script>
 	</head>
 	<body>
 		<div class="container">
+			<!-- Heading and Load Button -->
 			<div class="row">
 				<div class="col s6"><h4>Users</h4></div>
 				<div class="col s6" style="text-align: right">
 					<br />
-					<button id="refreshData" class="waves-effect waves-light btn-large red">Load Data</button>
+					<button id="refresh-data" class="waves-effect waves-light btn purple">Load Data</button>
 				</div>
 			</div>
-			<table>
-				<thead>
-					<tr>
-						<th>First Name</th>
-						<th>Middle Name</th>
-						<th>Last Name</th>
-						<th>Email</th>
-						<th>Address</th>
-						<th>Phone</th>
-						<th>Role</th>
-						<th>Actions</th>
-					</tr>
-				</thead>
+			<!-- // Heading and Load Button -->
 
-				<tbody id="tbody"></tbody>
-			</table>
+			<div class="main-view-wrapper">
+				<!-- To be populated by JS -->
+			</div>
+
+			<!-- Templates -->
+			<template id="add-btn">
+				<button data-target="new-user-modal" class="waves-effect modal-trigger waves-light btn-large">
+					New User
+				</button>
+			</template>
+			<template id="user-view">
+				<div class="row">
+					<div class="col s6" id="search-input-container">
+						<!-- <input> to be rendered by JS -->
+					</div>
+					<div class="col s6" style="text-align: right">
+						<div id="add-user-container"></div>
+					</div>
+				</div>
+				<div id="table-wrapper">
+					<!-- <table> to be rendered by JS -->
+				</div>
+			</template>
+			<template id="table">
+				<table class="striped">
+					<thead></thead>
+					<tbody></tbody>
+				</table>
+			</template>
+			<template id="search-input">
+				<input type="search" placeholder="Search" />
+			</template>
+
+			<template id="general-mode-actions">
+				<button class="btn edit-button"><i class="material-icons">edit</i></button>
+				<button class="btn red delete-button"><i class="material-icons">delete</i></button>
+			</template>
+			<template id="edit-mode-actions">
+				<button class="btn save-button"><i class="material-icons">save</i></button>
+				<button class="btn grey cancel-button"><i class="material-icons">cancel</i></button>
+			</template>
+
+			<div id="new-user-modal" class="modal">
+				<div class="modal-content">
+					<h4>Add New User</h4>
+					<p>Fill in the details</p>
+					<div id="new-user-form"></div>
+				</div>
+			</div>
 		</div>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+		<script>
+			document.addEventListener("DOMContentLoaded", function () {
+				M.AutoInit();
+			});
+		</script>
 	</body>
 </html>

@@ -1,0 +1,16 @@
+{
+	"name": "ts-assignment",
+	"description": "",
+	"version": "1.0.0",
+	"devDependencies": {},
+	"scripts": {
+		"start": "tsc -w",
+		"build": "tsc"
+	},
+	"author": "",
+	"license": "ISC",
+	"homepage": "https://github.com/shubham-prajapat/sftc-typescript-assignment#readme",
+	"dependencies": {
+		"typescript": "^4.7.4"
+	}
+}
