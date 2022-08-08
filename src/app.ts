@@ -11,6 +11,12 @@ const fieldsToShow: Array<FieldSchema> = [
 		validations: { required: true },
 	},
 	{
+		key: "middleName",
+		label: "Middle Name",
+		value: "text",
+		validations: { required: true },
+	},
+	{
 		key: "lastName",
 		label: "Last Name",
 		value: "text",

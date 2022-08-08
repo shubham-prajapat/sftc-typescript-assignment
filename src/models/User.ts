@@ -1,6 +1,6 @@
 import FormatDate from "../decorators/FormatDate.js";
 import Replace from "../decorators/Replace.js";
-import { getTemplateContent, parseDOM, qs } from "../utils/dom.js";
+import { getTemplateContent, qs } from "../utils/dom.js";
 import Validator from "../utils/validation.js";
 
 export enum Roles {
@@ -138,14 +138,17 @@ class User {
 	get columnData() {
 		return this._data;
 	}
+
 	contains(query: string) {
 		let dataToMatchWith = this.fields.map((f) => f.key as keyof UserEntry).map((key) => this.columnData[key]);
 
 		return dataToMatchWith.join(" ").toLowerCase().includes(query.trim().toLowerCase());
 	}
+
 	triggerUpdate() {
 		this.updateListener();
 	}
+
 	addUpdateListener(callback: Function) {
 		this.updateListener = callback;
 	}

@@ -1,8 +1,8 @@
 [
 	{
-		"firstName": "Shubham",
-		"middleName": "mid",
-		"lastName": "Prajapat",
+		"firstName": "James",
+		"middleName": "S",
+		"lastName": "Mary",
 		"email": "user1@gmail.com",
 		"address": "US",
 		"phone": "8564772588",
@@ -10,9 +10,9 @@
 		"dob": "2008-07-22"
 	},
 	{
-		"firstName": "User",
-		"middleName": "mid",
-		"lastName": "2",
+		"firstName": "Robert",
+		"middleName": "T",
+		"lastName": "Patricia",
 		"email": "user2@gmail.com",
 		"address": "UK",
 		"phone": "9987751651",
@@ -20,9 +20,9 @@
 		"dob": "2001-07-22"
 	},
 	{
-		"firstName": "User",
-		"middleName": "mid",
-		"lastName": "3",
+		"firstName": "John",
+		"middleName": "N",
+		"lastName": "Jennifer",
 		"email": "user2@gmail.com",
 		"address": "India",
 		"phone": "8500035699",
