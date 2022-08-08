@@ -1,30 +1,32 @@
 [
 	{
-		"firstName": "User 1",
+		"firstName": "Shubham",
 		"middleName": "mid",
-		"lastName": "last",
+		"lastName": "Prajapat",
 		"email": "user1@gmail.com",
-		"address": "India",
-		"phone": "9876543120",
+		"address": "US",
+		"phone": "8564772588",
 		"role": 1,
-		"DOB": "19-01-2022"
+		"dob": "2008-07-22"
 	},
 	{
-		"firstName": "User 2",
+		"firstName": "User",
 		"middleName": "mid",
-		"lastName": "last",
+		"lastName": "2",
 		"email": "user2@gmail.com",
-		"address": "India",
-		"phone": "9876543120",
-		"role": 2
+		"address": "UK",
+		"phone": "9987751651",
+		"role": 2,
+		"dob": "2001-07-22"
 	},
 	{
-		"firstName": "User 3",
+		"firstName": "User",
 		"middleName": "mid",
-		"lastName": "last",
+		"lastName": "3",
 		"email": "user2@gmail.com",
 		"address": "India",
-		"phone": "9876543120",
-		"role": 3
+		"phone": "8500035699",
+		"role": 3,
+		"dob": "1999-07-01"
 	}
 ]
