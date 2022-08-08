@@ -1,5 +1,6 @@
-import User from "../models/User.js";
+import User, { UserEntry } from "../models/User.js";
 import { qs } from "../utils/dom.js";
+import { closePopup } from "../utils/materialize.js";
 import AddBtn from "./AddBtn.js";
 import FormFields from "./FormFields.js";
 import SearchInput from "./SearchInput.js";
@@ -23,6 +24,7 @@ class UserView extends TemplateRenderer {
 		// Set New User Form
 		new FormFields(this.options.fieldsToShow, {
 			container: qs("#new-user-form") as HTMLElement,
+			onSubmit: this.addNewUser,
 		});
 
 		// Set New User Button
@@ -48,6 +50,12 @@ class UserView extends TemplateRenderer {
 		this.users.forEach((user) => {
 			user.hide = !user.contains(query);
 		});
+		this.refreshTable();
+	};
+	addNewUser = (user: {}) => {
+		console.log("Add new user", user);
+		this.users.push(new User(user as UserEntry, this.options.fieldsToShow));
+		closePopup("new-user-modal");
 		this.refreshTable();
 	};
 }

@@ -1,9 +1,6 @@
-interface FieldSchema {
-	key: string;
-	label: string;
-	value: "text" | "number" | "date" | Array<[value: number | string | boolean, label: string]>;
+interface Window {
+	M: any;
 }
-
 interface Validations {
 	required: boolean;
 	min: number;
@@ -12,4 +9,11 @@ interface Validations {
 	maxLength: number;
 	shouldBeEmail: boolean;
 	shouldBeNumeric: boolean;
+}
+
+interface FieldSchema {
+	key: string;
+	label: string;
+	value: "text" | "number" | "date" | Array<[value: number | string | boolean, label: string]>;
+	validations: Partial<Validations>;
 }

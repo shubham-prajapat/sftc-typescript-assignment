@@ -1,5 +1,8 @@
 class Validator {
-	static validate(value: number | string, validations: Partial<Validations>) {
+	static run(value: number | string, validations: Partial<Validations>) {
+		if (!!!value) {
+			return false;
+		}
 		let isValid = true;
 		if (validations.required) {
 			isValid = isValid && value.toString().trim().length > 0;

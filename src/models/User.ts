@@ -39,13 +39,13 @@ class User {
 				let input: HTMLInputElement | HTMLSelectElement = document.createElement("input");
 				if (typeof field.value === "string") {
 					input.type = field.value;
+					input.name = field.key;
 					input.value = this._data[key].toString();
 				} else if (Array.isArray(field.value)) {
 					input = document.createElement("select");
 					input.className = "browser-default";
 					input.style.width = "max-content";
 					for (let option of field.value) {
-						console.log(this.data.role, option[0]);
 						input.innerHTML += `<option value="${option[0]}" ${
 							this.data.role.toString() === option[0].toString() ? "selected" : ""
 						}>${option[1]}</option>`;
