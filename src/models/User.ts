@@ -1,6 +1,7 @@
 import FormatDate from "../decorators/FormatDate.js";
 import Replace from "../decorators/Replace.js";
 import { getTemplateContent, parseDOM, qs } from "../utils/dom.js";
+import Validator from "../utils/validation.js";
 
 export enum Roles {
 	SuperAdmin = 1,
@@ -22,6 +23,7 @@ class User {
 	private _data: UserEntry;
 	public hide: boolean = false;
 	public editMode: boolean = false;
+	private userInputs: Partial<Record<keyof UserEntry, any>> = {};
 	public deleted: boolean = false;
 	private updateListener: Function = () => false;
 	constructor(data: UserEntry, private fields: FieldSchema[]) {
@@ -40,16 +42,24 @@ class User {
 				if (typeof field.value === "string") {
 					input.type = field.value;
 					input.name = field.key;
-					input.value = this._data[key].toString();
+					input.value = this.userInputs[key].toString();
+					input.oninput = () => {
+						console.log("on change", input.value);
+						this.userInputs[key] = input.value;
+					};
 				} else if (Array.isArray(field.value)) {
 					input = document.createElement("select");
 					input.className = "browser-default";
 					input.style.width = "max-content";
 					for (let option of field.value) {
 						input.innerHTML += `<option value="${option[0]}" ${
-							this.data.role.toString() === option[0].toString() ? "selected" : ""
+							this.userInputs.role.toString() === option[0].toString() ? "selected" : ""
 						}>${option[1]}</option>`;
 					}
+					input.onchange = () => {
+						console.log("on change", input.value);
+						this.userInputs[key] = input.value;
+					};
 				}
 				td.appendChild(input);
 			} else {
@@ -75,6 +85,7 @@ class User {
 		if (!this.editMode) {
 			(qs("button.edit-button", td) as HTMLButtonElement).addEventListener("click", () => {
 				this.editMode = true;
+				this.userInputs = { ...this._data };
 				this.triggerUpdate();
 			});
 			(qs("button.delete-button", td) as HTMLButtonElement).addEventListener("click", () => {
@@ -86,9 +97,25 @@ class User {
 			});
 		} else {
 			(qs("button.save-button", td) as HTMLButtonElement).addEventListener("click", () => {
-				console.log("save Button");
-				this.editMode = false;
-				this.triggerUpdate();
+				let updatedData = {
+					...this._data,
+					...this.userInputs,
+				};
+				let allGood = true;
+				for (let field of this.fields) {
+					let valid = Validator.run(updatedData[field.key as keyof UserEntry], field.validations);
+					console.log(updatedData[field.key as keyof UserEntry]);
+					if (!valid) {
+						allGood = false;
+						window.M.toast({ html: `Invalid ${field.label}` });
+						break;
+					}
+				}
+				if (allGood) {
+					this._data = updatedData;
+					this.editMode = false;
+					this.triggerUpdate();
+				}
 			});
 			(qs("button.cancel-button", td) as HTMLButtonElement).addEventListener("click", () => {
 				this.editMode = false;
