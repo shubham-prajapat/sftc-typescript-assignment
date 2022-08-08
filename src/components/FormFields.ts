@@ -33,6 +33,7 @@ class FormFields {
                 </div>`;
 			}
 			form.innerHTML += userInputMarkup;
+			this.options.container.innerHTML = "";
 			this.options.container.appendChild(form);
 		}
 
