@@ -9,8 +9,6 @@ class FormFields {
 		this.configure();
 	}
 	configure() {
-		console.log(this.fields);
-
 		let form = document.createElement("form");
 
 		let userInputMarkup = ``;

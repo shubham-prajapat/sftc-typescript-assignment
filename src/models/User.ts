@@ -44,7 +44,6 @@ class User {
 					input.name = field.key;
 					input.value = this.userInputs[key].toString();
 					input.oninput = () => {
-						console.log("on change", input.value);
 						this.userInputs[key] = input.value;
 					};
 				} else if (Array.isArray(field.value)) {
@@ -57,7 +56,6 @@ class User {
 						}>${option[1]}</option>`;
 					}
 					input.onchange = () => {
-						console.log("on change", input.value);
 						this.userInputs[key] = input.value;
 					};
 				}
@@ -104,7 +102,6 @@ class User {
 				let allGood = true;
 				for (let field of this.fields) {
 					let valid = Validator.run(updatedData[field.key as keyof UserEntry], field.validations);
-					console.log(updatedData[field.key as keyof UserEntry]);
 					if (!valid) {
 						allGood = false;
 						window.M.toast({ html: `Invalid ${field.label}` });

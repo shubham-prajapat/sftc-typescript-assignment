@@ -46,14 +46,13 @@ class UserView extends TemplateRenderer {
 		});
 	};
 	handleSearch = (query: string) => {
-		console.log(query);
 		this.users.forEach((user) => {
 			user.hide = !user.contains(query);
 		});
 		this.refreshTable();
 	};
 	addNewUser = (user: {}) => {
-		console.log("Add new user", user);
+		window.M.toast({ html: `Saved!` });
 		this.users.push(new User(user as UserEntry, this.options.fieldsToShow));
 		closePopup("new-user-modal");
 		this.refreshTable();
