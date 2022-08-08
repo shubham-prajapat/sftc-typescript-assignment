@@ -1,6 +1,6 @@
 class Validator {
 	static run(value: number | string, validations: Partial<Validations>) {
-		if (!!!value) {
+		if (value === null || value === undefined) {
 			return false;
 		}
 		let isValid = true;

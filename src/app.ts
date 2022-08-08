@@ -32,7 +32,7 @@ const fieldsToShow: Array<FieldSchema> = [
 		key: "address",
 		label: "Address",
 		value: "text",
-		validations: { required: true },
+		validations: { required: false },
 	},
 	{
 		key: "phone",
